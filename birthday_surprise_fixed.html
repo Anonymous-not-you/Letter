@@ -827,7 +827,7 @@
 
       const birthdayDate = "2026-09-09";
 
-      const birthdayTime = "05:09:00";
+      const birthdayTime = "05:12:00";
 
       /* =========================================================
    CREATE TARGET DATE
@@ -852,6 +852,13 @@
       const audio = document.getElementById("myAudio");
 
       const readAgainButton = document.getElementById("readAgainButton");
+
+      // The Read Again button is intentionally hidden/removed in this version.
+      // Use a safe fallback so the birthday reveal script never stops on mobile.
+      const safeReadAgainButton = readAgainButton || {
+        style: { display: "none" },
+        addEventListener: () => {},
+      };
 
       const starCanvas = document.getElementById("star-canvas");
 
@@ -1041,7 +1048,7 @@
 
         /* Hide Read Again until writing is finished */
 
-        readAgainButton.style.display = "none";
+        safeReadAgainButton.style.display = "none";
 
         /* Start floating hearts */
 
@@ -1077,7 +1084,7 @@
 
         /* Hide button while writing */
 
-        readAgainButton.style.display = "none";
+        safeReadAgainButton.style.display = "none";
 
         /* Type one paragraph at a time */
 
@@ -1087,7 +1094,7 @@
 
         /* Show Read Again after everything is finished */
 
-        readAgainButton.style.display = "block";
+        safeReadAgainButton.style.display = "block";
       }
 
       /* =========================================================
@@ -1130,7 +1137,7 @@
    💌 READ AGAIN
 ========================================================= */
 
-      readAgainButton.addEventListener("click", () => {
+      safeReadAgainButton.addEventListener("click", () => {
         startWriting();
       });
 
@@ -1362,49 +1369,13 @@
       }
 
       /* =========================================================
-   🎵 PHONE MUSIC START
-   Mobile browsers usually block autoplay with sound until the
-   visitor interacts with the page. Start the music on the first
-   tap/touch anywhere after the birthday letter is revealed.
+   🎵 AUTOPLAY FALLBACK
 ========================================================= */
 
-      let musicInteractionUsed = false;
-
-      function startMusicFromInteraction(event) {
-        // Do not interfere with the music button itself.
-        if (event && event.target === audioToggle) {
-          return;
-        }
-
-        if (letterRevealed && !isPlaying && !musicInteractionUsed) {
-          musicInteractionUsed = true;
-          tryPlayMusic();
-        }
-      }
-
-      // pointerdown fires immediately for taps on modern phones and
-      // preserves the user's gesture, which is important for mobile autoplay.
-      window.addEventListener("pointerdown", startMusicFromInteraction, {
-        passive: true,
-        capture: true,
-      });
-
-      // Fallback for older mobile browsers that do not fully support pointer events.
-      window.addEventListener("touchstart", startMusicFromInteraction, {
-        passive: true,
-        capture: true,
-      });
-
-      // Desktop/fallback click support.
       window.addEventListener(
         "click",
-        (event) => {
-          if (event.target === audioToggle) {
-            return;
-          }
-
+        () => {
           if (letterRevealed && !isPlaying) {
-            musicInteractionUsed = true;
             tryPlayMusic();
           }
         },
