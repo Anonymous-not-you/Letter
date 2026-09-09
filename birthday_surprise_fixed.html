@@ -7,10 +7,6 @@
     <title>Birthday Surprise 🎀</title>
 
     <style>
-      /* =========================================================
-   GENERAL
-========================================================= */
-
       :root {
         --pink-light: #fff5fa;
         --pink-soft: #ffdce9;
@@ -36,9 +32,7 @@
       body {
         min-height: 100vh;
         overflow-x: hidden;
-
         font-family: Georgia, "Times New Roman", serif;
-
         color: var(--text);
 
         background:
@@ -61,8 +55,8 @@
       }
 
       /* =========================================================
-   COUNTDOWN SCREEN
-========================================================= */
+         COUNTDOWN
+      ========================================================= */
 
       #countdown-screen {
         position: fixed;
@@ -104,7 +98,6 @@
         left: 8%;
 
         font-size: clamp(35px, 7vw, 70px);
-
         opacity: 0.65;
 
         transform: rotate(-15deg);
@@ -118,19 +111,13 @@
         bottom: 10%;
 
         font-size: clamp(40px, 8vw, 80px);
-
         opacity: 0.7;
 
         transform: rotate(8deg);
       }
 
-      /* =========================================================
-   CAKE
-========================================================= */
-
       .cake-decoration {
         font-size: clamp(45px, 8vw, 75px);
-
         margin-bottom: 12px;
 
         filter: drop-shadow(0 8px 12px rgba(190, 80, 130, 0.18));
@@ -138,15 +125,10 @@
         animation: cakeFloat 3s ease-in-out infinite;
       }
 
-      /* =========================================================
-   COUNTDOWN TITLE
-========================================================= */
-
       #countdown-title {
         color: var(--rose);
 
         font-size: clamp(27px, 5vw, 46px);
-
         font-weight: bold;
 
         text-shadow: 0 4px 15px rgba(190, 80, 130, 0.18);
@@ -159,13 +141,8 @@
         color: var(--text-soft);
 
         font-size: clamp(13px, 2vw, 17px);
-
         letter-spacing: 1px;
       }
-
-      /* =========================================================
-   TARGET DATE
-========================================================= */
 
       #birthday-date {
         margin-bottom: 22px;
@@ -173,17 +150,11 @@
         color: var(--rose);
 
         font-size: clamp(17px, 3vw, 25px);
-
         font-weight: bold;
-
         letter-spacing: 1px;
 
         text-shadow: 0 3px 10px rgba(190, 80, 130, 0.15);
       }
-
-      /* =========================================================
-   COUNTDOWN TIMER
-========================================================= */
 
       #countdown-timer {
         min-width: 330px;
@@ -196,13 +167,10 @@
         background: rgba(255, 255, 255, 0.85);
 
         border: 2px solid rgba(255, 150, 195, 0.38);
-
         border-radius: 24px;
 
         font-size: clamp(27px, 6vw, 44px);
-
         font-weight: bold;
-
         letter-spacing: 2px;
 
         box-shadow:
@@ -213,13 +181,12 @@
       }
 
       /* =========================================================
-   CANVAS
-========================================================= */
+         CANVAS
+      ========================================================= */
 
       #star-canvas,
       #heart-canvas {
         position: fixed;
-
         inset: 0;
 
         width: 100%;
@@ -237,12 +204,11 @@
       }
 
       /* =========================================================
-   LETTER CONTAINER
-========================================================= */
+         LETTER
+      ========================================================= */
 
       .letter-container {
         position: relative;
-
         z-index: 10;
 
         width: 900px;
@@ -254,10 +220,6 @@
 
         animation: letterContainerReveal 1.5s ease;
       }
-
-      /* =========================================================
-   LETTER PAPER
-========================================================= */
 
       .letter-paper {
         position: relative;
@@ -288,20 +250,14 @@
         animation-delay: 0.3s;
       }
 
-      /* =========================================================
-   PAPER DECORATIONS
-========================================================= */
-
       .letter-paper::before {
         content: "♡";
 
         position: absolute;
-
         top: 18px;
         left: 24px;
 
         color: #f3a4c4;
-
         font-size: 28px;
       }
 
@@ -309,18 +265,12 @@
         content: "♡";
 
         position: absolute;
-
         top: 18px;
         right: 24px;
 
         color: #f3a4c4;
-
         font-size: 28px;
       }
-
-      /* =========================================================
-   LETTER HEADING
-========================================================= */
 
       .letter-heading {
         text-align: center;
@@ -328,7 +278,6 @@
         color: #c95487;
 
         font-size: clamp(28px, 5vw, 43px);
-
         font-weight: bold;
 
         margin-bottom: 8px;
@@ -342,15 +291,10 @@
         color: #a8798d;
 
         font-size: 14px;
-
         letter-spacing: 2px;
 
         margin-bottom: 35px;
       }
-
-      /* =========================================================
-   MESSAGE AREA
-========================================================= */
 
       .message {
         color: #684d5b;
@@ -358,7 +302,6 @@
         font-family: "Times New Roman", Times, serif;
 
         font-size: 17px;
-
         line-height: 1.9;
 
         text-align: left;
@@ -366,21 +309,12 @@
         letter-spacing: 0.1px;
       }
 
-      /* =========================================================
-   EACH TYPED LINE
-========================================================= */
-
       .type-line {
         position: relative;
 
         margin-bottom: 22px;
-
         min-height: 32px;
       }
-
-      /* =========================================================
-   WRITING CURSOR
-========================================================= */
 
       .type-line.writing::after {
         content: "";
@@ -388,7 +322,6 @@
         display: inline-block;
 
         width: 2px;
-
         height: 1.1em;
 
         margin-left: 3px;
@@ -400,21 +333,12 @@
         animation: blinkCursor 0.7s infinite;
       }
 
-      /* =========================================================
-   GREETING
-========================================================= */
-
       .greeting {
         color: #9d456c;
 
         font-weight: bold;
-
         font-size: 18px;
       }
-
-      /* =========================================================
-   CLOSING
-========================================================= */
 
       .closing {
         margin-top: 35px;
@@ -424,15 +348,10 @@
         color: #8e5c72;
 
         font-style: italic;
-
         line-height: 1.8;
 
         min-height: 35px;
       }
-
-      /* =========================================================
-   FINAL MESSAGE
-========================================================= */
 
       .final-message {
         margin-top: 25px;
@@ -442,17 +361,11 @@
         color: #c05687;
 
         font-size: 21px;
-
         font-weight: bold;
-
         font-style: normal;
 
         min-height: 40px;
       }
-
-      /* =========================================================
-   FROM YOUR ADMIRER
-========================================================= */
 
       .admirer-message {
         margin-top: 8px;
@@ -464,7 +377,6 @@
         font-family: "Times New Roman", Times, serif;
 
         font-size: 16px;
-
         font-style: italic;
 
         letter-spacing: 0.5px;
@@ -473,8 +385,8 @@
       }
 
       /* =========================================================
-   READ AGAIN BUTTON
-========================================================= */
+         BUTTONS
+      ========================================================= */
 
       #readAgainButton {
         display: none;
@@ -488,13 +400,11 @@
         background: rgba(255, 245, 249, 0.95);
 
         border: 1px solid rgba(220, 110, 160, 0.35);
-
         border-radius: 30px;
 
         font-family: Georgia, "Times New Roman", serif;
 
         font-size: 14px;
-
         font-weight: bold;
 
         cursor: pointer;
@@ -506,10 +416,7 @@
 
       #readAgainButton:hover {
         transform: translateY(-2px);
-
         background: #fff;
-
-        box-shadow: 0 10px 30px rgba(210, 90, 145, 0.2);
       }
 
       #readAgainButton:active {
@@ -517,8 +424,8 @@
       }
 
       /* =========================================================
-   MUSIC BUTTON
-========================================================= */
+         MUSIC BUTTON
+      ========================================================= */
 
       .audio-hint {
         position: fixed;
@@ -553,10 +460,7 @@
 
       .audio-hint:hover {
         transform: translateY(-2px);
-
         background: #fff;
-
-        box-shadow: 0 10px 30px rgba(210, 90, 145, 0.2);
       }
 
       .audio-hint:active {
@@ -564,8 +468,8 @@
       }
 
       /* =========================================================
-   ANIMATIONS
-========================================================= */
+         ANIMATIONS
+      ========================================================= */
 
       @keyframes fadeIn {
         from {
@@ -594,13 +498,11 @@
       @keyframes letterAppear {
         from {
           opacity: 0;
-
           transform: translateY(40px);
         }
 
         to {
           opacity: 1;
-
           transform: translateY(0);
         }
       }
@@ -640,8 +542,8 @@
       }
 
       /* =========================================================
-   MOBILE
-========================================================= */
+         MOBILE
+      ========================================================= */
 
       @media (max-width: 700px) {
         #countdown-screen {
@@ -658,13 +560,11 @@
 
         #birthday-date {
           font-size: 18px;
-
           margin-bottom: 18px;
         }
 
         #countdown-timer {
           width: 90%;
-
           min-width: 0;
 
           padding: 17px 12px;
@@ -674,13 +574,11 @@
 
         .letter-container {
           width: 95%;
-
           margin: 45px auto;
         }
 
         .letter-paper {
           width: 92%;
-
           padding: 45px 25px 45px;
         }
 
@@ -690,21 +588,16 @@
 
         .letter-subheading {
           font-size: 11px;
-
           margin-bottom: 28px;
         }
 
         .message {
           font-size: 15px;
-
           line-height: 1.8;
-
-          font-family: "Times New Roman", Times, serif;
         }
 
         .type-line {
           margin-bottom: 19px;
-
           min-height: 28px;
         }
 
@@ -726,13 +619,11 @@
 
         #readAgainButton {
           font-size: 13px;
-
           padding: 9px 20px;
         }
 
         .audio-hint {
           right: 12px;
-
           bottom: 12px;
 
           padding: 9px 14px;
@@ -752,8 +643,6 @@
 
         .message {
           font-size: 14px;
-
-          font-family: "Times New Roman", Times, serif;
         }
       }
     </style>
@@ -761,8 +650,8 @@
 
   <body>
     <!-- =========================================================
-     COUNTDOWN
-========================================================= -->
+       COUNTDOWN SCREEN
+    ========================================================= -->
 
     <div id="countdown-screen">
       <div class="cake-decoration">🎂</div>
@@ -773,19 +662,19 @@
 
       <div id="birthday-date">Loading date...</div>
 
-      <div id="countdown-timer">00m : 00s</div>
+      <div id="countdown-timer">00:00:00</div>
     </div>
 
     <!-- =========================================================
-     BACKGROUND CANVAS
-========================================================= -->
+       BACKGROUND CANVAS
+    ========================================================= -->
 
     <canvas id="star-canvas"></canvas>
     <canvas id="heart-canvas"></canvas>
 
     <!-- =========================================================
-     🎵 BACKGROUND MUSIC
-========================================================= -->
+       MUSIC
+    ========================================================= -->
 
     <audio id="myAudio" loop preload="auto">
       <source
@@ -795,16 +684,16 @@
     </audio>
 
     <!-- =========================================================
-     🎵 MUSIC BUTTON
-========================================================= -->
+       MUSIC BUTTON
+    ========================================================= -->
 
     <button id="audioToggle" class="audio-hint" type="button">
       🎵 Play Music
     </button>
 
     <!-- =========================================================
-     LETTER
-========================================================= -->
+       LETTER
+    ========================================================= -->
 
     <div class="letter-container" id="letterWindow">
       <div class="letter-paper">
@@ -814,30 +703,42 @@
 
         <div class="message" id="writingArea"></div>
 
-        <!-- READ AGAIN BUTTON -->
-
-        <!-- <button id="readAgainButton" type="button">💌 Read Again</button> -->
+        <button id="readAgainButton" type="button">💌 Read Again</button>
       </div>
     </div>
 
     <script>
       /* =========================================================
-   🎯 BIRTHDAY DATE AND TIME
-========================================================= */
+         🎯 BIRTHDAY DATE AND TIME
+
+         ⭐ CHANGE ONLY THESE TWO LINES ⭐
+      ========================================================= */
 
       const birthdayDate = "2026-09-09";
 
-      const birthdayTime = "05:12:00";
+      const birthdayTime = "19:48:00";
 
       /* =========================================================
-   CREATE TARGET DATE
-========================================================= */
+         CREATE TARGET DATE
+      ========================================================= */
 
-      const targetDate = new Date(birthdayDate + "T" + birthdayTime).getTime();
+      const [year, month, day] = birthdayDate.split("-").map(Number);
+
+      const [hour, minute, second] = birthdayTime.split(":").map(Number);
+
+      const targetDate = new Date(
+        year,
+        month - 1,
+        day,
+        hour,
+        minute,
+        second,
+        0,
+      ).getTime();
 
       /* =========================================================
-   GET ELEMENTS
-========================================================= */
+         GET HTML ELEMENTS
+      ========================================================= */
 
       const countdownScreen = document.getElementById("countdown-screen");
 
@@ -853,13 +754,6 @@
 
       const readAgainButton = document.getElementById("readAgainButton");
 
-      // The Read Again button is intentionally hidden/removed in this version.
-      // Use a safe fallback so the birthday reveal script never stops on mobile.
-      const safeReadAgainButton = readAgainButton || {
-        style: { display: "none" },
-        addEventListener: () => {},
-      };
-
       const starCanvas = document.getElementById("star-canvas");
 
       const heartCanvas = document.getElementById("heart-canvas");
@@ -869,8 +763,8 @@
       const heartCtx = heartCanvas.getContext("2d");
 
       /* =========================================================
-   VARIABLES
-========================================================= */
+         VARIABLES
+      ========================================================= */
 
       let letterRevealed = false;
 
@@ -881,87 +775,69 @@
       let heartsStarted = false;
 
       /* =========================================================
-   ✉️ LETTER CONTENT
-========================================================= */
+         💌 LETTER CONTENT
+      ========================================================= */
 
       const letterLines = [
         {
           text: "Dear Daizelle,",
-
           speed: 80,
-
           className: "greeting",
         },
 
         {
-          text: "Happy Birthday to a special and hard-working girl! I hope you take a break from all your lectures, assignments and exams today to celebrate fully.",
-
+          text: "Happy Birthday to a special and hard-working girl! I hope you take a break from all your lectures, activity and exams today to celebrate fully.",
           speed: 45,
-
           className: "",
         },
 
         {
-          text: "It is so inspiring to watch you balance your college life while you always keep a positive and bright attitude. You truly bring a lot of energy into the room and I feel so lucky to know you.",
-
+          text: "It’s so inspiring to see you balance college while staying so positive and bright. Even though you get annoyed easily, you honestly bring so much fun energy to us, and we feel incredibly lucky to have you as our friend!",
           speed: 45,
-
           className: "",
         },
 
         {
-          text: "I hope your birthday is filled with your people, tasty food and a big slice of cake. May the year bring you closer to all your biggest academic goals and personal dreams.",
-
+          text: "I hope your birthday is surrounded by your favorite people, tasty food, and a big slice of cake. May this year be good to you, and may it bring you endless happiness, beautiful memories, and everything your heart desires.",
           speed: 45,
-
           className: "",
         },
 
         {
           text: "You deserve all the happiness in the world today and every day after. Have a wonderful birthday celebration tonight! 🎉",
-
           speed: 45,
-
           className: "",
         },
 
         {
           text: "Wishing you a beautiful birthday and a wonderful year ahead. 💗",
-
           speed: 55,
-
           className: "closing",
         },
 
         {
           text: "Happy Birthday, Daizelle! 🎂💗",
-
           speed: 80,
-
           className: "final-message",
         },
 
         {
           text: "From your admirer ♡",
-
           speed: 70,
-
           className: "admirer-message",
         },
       ];
 
       /* =========================================================
-   SHOW BIRTHDAY DATE
-========================================================= */
+         SHOW DATE
+      ========================================================= */
 
       function displayBirthdayDate() {
-        const date = new Date(birthdayDate + "T00:00:00");
+        const date = new Date(year, month - 1, day);
 
         birthdayDateDisplay.textContent = date.toLocaleDateString("en-US", {
           month: "long",
-
           day: "numeric",
-
           year: "numeric",
         });
       }
@@ -969,8 +845,28 @@
       displayBirthdayDate();
 
       /* =========================================================
-   COUNTDOWN
-========================================================= */
+         COUNTDOWN FORMAT
+      ========================================================= */
+
+      function formatCountdown(totalSeconds) {
+        const hours = Math.floor(totalSeconds / 3600);
+
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+        const seconds = totalSeconds % 60;
+
+        return (
+          String(hours).padStart(2, "0") +
+          ":" +
+          String(minutes).padStart(2, "0") +
+          ":" +
+          String(seconds).padStart(2, "0")
+        );
+      }
+
+      /* =========================================================
+         UPDATE COUNTDOWN
+      ========================================================= */
 
       function updateCountdown() {
         const now = Date.now();
@@ -978,7 +874,7 @@
         const difference = targetDate - now;
 
         if (difference <= 0) {
-          countdownTimer.textContent = "00m : 00s";
+          countdownTimer.textContent = "00:00:00";
 
           revealBirthdayLetter();
 
@@ -987,39 +883,20 @@
 
         const totalSeconds = Math.ceil(difference / 1000);
 
-        const days = Math.floor(totalSeconds / 86400);
-
-        const hours = Math.floor((totalSeconds % 86400) / 3600);
-
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-
-        const seconds = totalSeconds % 60;
-
-        if (days > 0) {
-          countdownTimer.textContent =
-            `${String(days).padStart(2, "0")}D : ` +
-            `${String(hours).padStart(2, "0")}h : ` +
-            `${String(minutes).padStart(2, "0")}m : ` +
-            `${String(seconds).padStart(2, "0")}s`;
-        } else {
-          countdownTimer.textContent =
-            `${String(hours).padStart(2, "0")}h : ` +
-            `${String(minutes).padStart(2, "0")}m : ` +
-            `${String(seconds).padStart(2, "0")}s`;
-        }
+        countdownTimer.textContent = formatCountdown(totalSeconds);
       }
 
       /* =========================================================
-   START COUNTDOWN
-========================================================= */
+         START COUNTDOWN
+      ========================================================= */
 
       updateCountdown();
 
-      countdownInterval = setInterval(updateCountdown, 250);
+      countdownInterval = setInterval(updateCountdown, 100);
 
       /* =========================================================
-   💌 REVEAL LETTER
-========================================================= */
+         💌 REVEAL BIRTHDAY
+      ========================================================= */
 
       function revealBirthdayLetter() {
         if (letterRevealed) {
@@ -1028,88 +905,117 @@
 
         letterRevealed = true;
 
+        /* STOP COUNTDOWN */
+
         if (countdownInterval !== null) {
           clearInterval(countdownInterval);
 
           countdownInterval = null;
         }
 
-        /* Hide countdown */
+        /* SHOW ZERO */
+
+        countdownTimer.textContent = "00:00:00";
+
+        /* HIDE COUNTDOWN */
 
         countdownScreen.style.display = "none";
 
-        /* Show letter */
+        /* SHOW LETTER */
 
         letterWindow.style.display = "block";
 
-        /* Show music button */
+        /* SHOW MUSIC BUTTON */
 
         audioToggle.style.display = "block";
 
-        /* Hide Read Again until writing is finished */
+        /* HIDE READ AGAIN */
 
-        safeReadAgainButton.style.display = "none";
+        readAgainButton.style.display = "none";
 
-        /* Start floating hearts */
+        /* START HEARTS */
 
         startHearts();
 
         /* =====================================================
-       🎵 MUSIC
-    ===================================================== */
+           🎵 START MUSIC AUTOMATICALLY
+        ===================================================== */
 
-        setTimeout(() => {
-          tryPlayMusic();
-        }, 1000);
+        setTimeout(function () {
+          playMusicAutomatically();
+        }, 300);
 
         /* =====================================================
-       ✍️ TYPEWRITER
-    ===================================================== */
+           ✍️ START LETTER
+        ===================================================== */
 
-        setTimeout(() => {
+        setTimeout(function () {
           startWriting();
         }, 2300);
       }
 
       /* =========================================================
-   ✍️ START WRITING
-========================================================= */
+         🎵 AUTOMATIC MUSIC
+      ========================================================= */
+
+      function playMusicAutomatically() {
+        if (!letterRevealed) {
+          return;
+        }
+
+        audio.volume = 0.9;
+        audio.muted = false;
+
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(function () {
+              isPlaying = true;
+
+              audioToggle.textContent = "🔇 Mute Music";
+            })
+            .catch(function (error) {
+              console.log("Autoplay was blocked by the browser.");
+
+              console.log(error);
+
+              isPlaying = false;
+
+              audioToggle.textContent = "🎵 Play Music";
+            });
+        }
+      }
+
+      /* =========================================================
+         ✍️ START WRITING
+      ========================================================= */
 
       async function startWriting() {
         const writingArea = document.getElementById("writingArea");
 
-        /* Make the letter blank */
-
         writingArea.innerHTML = "";
 
-        /* Hide button while writing */
-
-        safeReadAgainButton.style.display = "none";
-
-        /* Type one paragraph at a time */
+        readAgainButton.style.display = "none";
 
         for (const line of letterLines) {
           await typeLine(writingArea, line.text, line.speed, line.className);
         }
 
-        /* Show Read Again after everything is finished */
-
-        safeReadAgainButton.style.display = "block";
+        readAgainButton.style.display = "block";
       }
 
       /* =========================================================
-   ✍️ TYPE ONE LINE
-========================================================= */
+         ✍️ TYPE ONE LINE
+      ========================================================= */
 
       function typeLine(container, text, speed, className) {
-        return new Promise((resolve) => {
+        return new Promise(function (resolve) {
           const paragraph = document.createElement("p");
 
           paragraph.className = "type-line " + className;
 
           container.appendChild(paragraph);
-
-          /* Start cursor */
 
           paragraph.classList.add("writing");
 
@@ -1134,70 +1040,82 @@
       }
 
       /* =========================================================
-   💌 READ AGAIN
-========================================================= */
+         💌 READ AGAIN
+      ========================================================= */
 
-      safeReadAgainButton.addEventListener("click", () => {
+      readAgainButton.addEventListener("click", function () {
         startWriting();
       });
 
       /* =========================================================
-   🎵 TRY AUTOMATIC MUSIC
-========================================================= */
+         🎵 MUSIC BUTTON
 
-      function tryPlayMusic() {
-        if (!letterRevealed) {
+         PLAY → MUTE
+         MUTE → UNMUTE
+
+         IMPORTANT:
+         The music does NOT pause.
+         It only becomes silent when muted.
+      ========================================================= */
+
+      audioToggle.addEventListener("click", function (event) {
+        event.stopPropagation();
+
+        /* -----------------------------------------
+             If music is NOT playing,
+             start it first.
+          ----------------------------------------- */
+
+        if (audio.paused) {
+          audio.volume = 0.9;
+          audio.muted = false;
+
+          const playPromise = audio.play();
+
+          if (playPromise !== undefined) {
+            playPromise
+              .then(function () {
+                isPlaying = true;
+
+                audioToggle.textContent = "🔇 Mute Music";
+              })
+              .catch(function (error) {
+                console.error("Music could not play:", error);
+
+                isPlaying = false;
+
+                audioToggle.textContent = "🎵 Play Music";
+              });
+          }
+
           return;
         }
 
-        audio.volume = 0.9;
+        /* -----------------------------------------
+             Music is playing.
 
-        audio
-          .play()
-          .then(() => {
-            isPlaying = true;
+             If muted → unmute
+             If not muted → mute
+          ----------------------------------------- */
 
-            audioToggle.textContent = "🔇 Pause Music";
-          })
-          .catch(() => {
-            isPlaying = false;
+        if (audio.muted) {
+          audio.muted = false;
 
-            audioToggle.textContent = "🎵 Play Music";
-          });
-      }
+          isPlaying = true;
 
-      /* =========================================================
-   🎵 MUSIC BUTTON
-========================================================= */
-
-      audioToggle.addEventListener("click", (event) => {
-        event.stopPropagation();
-
-        if (!isPlaying) {
-          audio.volume = 0.9;
-
-          audio
-            .play()
-            .then(() => {
-              isPlaying = true;
-
-              audioToggle.textContent = "🔇 Pause Music";
-            })
-            .catch(() => {
-              audioToggle.textContent = "🎵 Play Music";
-            });
+          audioToggle.textContent = "🔇 Mute Music";
         } else {
-          audio.pause();
+          audio.muted = true;
 
-          isPlaying = false;
+          isPlaying = true;
 
-          audioToggle.textContent = "🎵 Play Music";
+          audioToggle.textContent = "🔊 Unmute Music";
         }
       });
 
       /* =========================================================
-   ⭐ STARS
-========================================================= */
+         ⭐ STARS
+      ========================================================= */
 
       const stars = [];
 
@@ -1217,10 +1135,6 @@
 
       resizeCanvases();
 
-      /* =========================================================
-   CREATE STARS
-========================================================= */
-
       for (let i = 0; i < starCount; i++) {
         stars.push({
           x: Math.random() * starCanvas.width,
@@ -1235,14 +1149,10 @@
         });
       }
 
-      /* =========================================================
-   DRAW STARS
-========================================================= */
-
       function drawStars() {
         starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
 
-        stars.forEach((star) => {
+        stars.forEach(function (star) {
           star.opacity += star.speed;
 
           if (star.opacity >= 1 || star.opacity <= 0) {
@@ -1254,11 +1164,11 @@
           starCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
 
           starCtx.fillStyle = `rgba(
-                    255,
-                    160,
-                    205,
-                    ${Math.abs(star.opacity)}
-                )`;
+            255,
+            160,
+            205,
+            ${Math.abs(star.opacity)}
+          )`;
 
           starCtx.fill();
         });
@@ -1269,8 +1179,8 @@
       drawStars();
 
       /* =========================================================
-   💗 HEARTS
-========================================================= */
+         💗 HEARTS
+      ========================================================= */
 
       const hearts = [];
 
@@ -1293,8 +1203,8 @@
       }
 
       /* =========================================================
-   DRAW HEART
-========================================================= */
+         DRAW HEART
+      ========================================================= */
 
       function drawHeart(ctx, x, y, size, opacity) {
         ctx.save();
@@ -1319,10 +1229,10 @@
         ctx.closePath();
 
         ctx.fillStyle = `rgba(
-            255,
-            145,
-            195,
-            ${opacity}
+          255,
+          145,
+          195,
+          ${opacity}
         )`;
 
         ctx.fill();
@@ -1331,8 +1241,8 @@
       }
 
       /* =========================================================
-   START HEARTS
-========================================================= */
+         START HEARTS
+      ========================================================= */
 
       function startHearts() {
         if (heartsStarted) {
@@ -1348,7 +1258,7 @@
 
           heartCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
 
-          hearts.forEach((heart) => {
+          hearts.forEach(function (heart) {
             drawHeart(heartCtx, heart.x, heart.y, heart.size, heart.opacity);
 
             heart.y -= heart.speed;
@@ -1367,22 +1277,6 @@
 
         animateHearts();
       }
-
-      /* =========================================================
-   🎵 AUTOPLAY FALLBACK
-========================================================= */
-
-      window.addEventListener(
-        "click",
-        () => {
-          if (letterRevealed && !isPlaying) {
-            tryPlayMusic();
-          }
-        },
-        {
-          passive: true,
-        },
-      );
     </script>
   </body>
 </html>
