@@ -703,370 +703,294 @@
 
         <div class="message" id="writingArea"></div>
 
-        <!-- <button id="readAgainButton" type="button">💌 Read Again</button> -->
+        <button id="readAgainButton" type="button">💌 Read Again</button>
       </div>
     </div>
 
     <script>
       /* =========================================================
-         🎯 BIRTHDAY DATE AND TIME
-
-         ⭐ CHANGE ONLY THESE TWO LINES ⭐
+         🎀 BIRTHDAY SURPRISE SCRIPT
+         Everything is inside one function so the countdown works
+         even if this file is opened/reloaded several times.
       ========================================================= */
 
-      const birthdayDate = "2026-09-09";
+      document.addEventListener("DOMContentLoaded", function () {
+        /* =========================================================
+           🎯 CHANGE ONLY THESE TWO VALUES
+        ========================================================= */
+
+        const birthdayDate = "2026-09-19";
+        const birthdayTime = "00:00:00";
+
+        /*
+          IMPORTANT:
+          Use 24-hour time.
+
+          Examples:
+          06:00:00 = 6:00 AM
+          12:00:00 = 12:00 PM
+          18:30:00 = 6:30 PM
+          20:00:00 = 8:00 PM
+
+          Philippine time (UTC+08:00) is used below.
+        */
+
+        /* =========================================================
+           GET HTML ELEMENTS
+        ========================================================= */
+
+        const countdownScreen = document.getElementById("countdown-screen");
+        const countdownTimer = document.getElementById("countdown-timer");
+        const birthdayDateDisplay = document.getElementById("birthday-date");
+        const letterWindow = document.getElementById("letterWindow");
+        const audioToggle = document.getElementById("audioToggle");
+        const audio = document.getElementById("myAudio");
+        const readAgainButton = document.getElementById("readAgainButton");
+        const starCanvas = document.getElementById("star-canvas");
+        const heartCanvas = document.getElementById("heart-canvas");
+
+        const starCtx = starCanvas.getContext("2d");
+        const heartCtx = heartCanvas.getContext("2d");
+
+        /* =========================================================
+           VARIABLES
+        ========================================================= */
+
+        let letterRevealed = false;
+        let countdownInterval = null;
+        let isPlaying = false;
+        let heartsStarted = false;
+        let writingStarted = false;
+
+        /* =========================================================
+           💌 LETTER CONTENT
+        ========================================================= */
+
+        const letterLines = [
+          {
+            text: "Dear Daizelle,",
+            speed: 80,
+            className: "greeting",
+          },
+
+          {
+            text: "Happy Birthday to a special and hard-working girl! I hope you take a break from all your lectures, assignments and exams today to celebrate fully.",
+            speed: 45,
+            className: "",
+          },
+
+          {
+            text: "It is so inspiring to watch you balance your college life while you always keep a positive and bright attitude. You truly bring a lot of energy into the room and I feel so lucky to know you.",
+            speed: 45,
+            className: "",
+          },
+
+          {
+            text: "I hope your birthday is filled with your people, tasty food and a big slice of cake. May the year bring you closer to all your biggest academic goals and personal dreams.",
+            speed: 45,
+            className: "",
+          },
+
+          {
+            text: "You deserve all the happiness in the world today and every day after. Have a wonderful birthday celebration tonight! 🎉",
+            speed: 45,
+            className: "",
+          },
+
+          {
+            text: "Wishing you a beautiful birthday and a wonderful year ahead. 💗",
+            speed: 55,
+            className: "closing",
+          },
+
+          {
+            text: "Happy Birthday, Daizelle! 🎂💗",
+            speed: 80,
+            className: "final-message",
+          },
+
+          {
+            text: "From your admirer ♡",
+            speed: 70,
+            className: "admirer-message",
+          },
+        ];
 
-      const birthdayTime = "20:27:00";
+        /* =========================================================
+           🎯 CREATE TARGET DATE
+        ========================================================= */
 
-      /* =========================================================
-         CREATE TARGET DATE
-      ========================================================= */
+        function getTargetTimestamp() {
+          const dateTimeText = birthdayDate + "T" + birthdayTime + "+08:00";
 
-      const [year, month, day] = birthdayDate.split("-").map(Number);
+          const timestamp = new Date(dateTimeText).getTime();
 
-      const [hour, minute, second] = birthdayTime.split(":").map(Number);
+          if (Number.isNaN(timestamp)) {
+            console.error(
+              "Invalid birthday date/time:",
+              birthdayDate,
+              birthdayTime,
+            );
 
-      const targetDate = new Date(
-        year,
-        month - 1,
-        day,
-        hour,
-        minute,
-        second,
-        0,
-      ).getTime();
-
-      /* =========================================================
-         GET HTML ELEMENTS
-      ========================================================= */
-
-      const countdownScreen = document.getElementById("countdown-screen");
-
-      const countdownTimer = document.getElementById("countdown-timer");
-
-      const birthdayDateDisplay = document.getElementById("birthday-date");
-
-      const letterWindow = document.getElementById("letterWindow");
-
-      const audioToggle = document.getElementById("audioToggle");
-
-      const audio = document.getElementById("myAudio");
-
-      const readAgainButton = document.getElementById("readAgainButton");
-
-      const starCanvas = document.getElementById("star-canvas");
-
-      const heartCanvas = document.getElementById("heart-canvas");
-
-      const starCtx = starCanvas.getContext("2d");
-
-      const heartCtx = heartCanvas.getContext("2d");
-
-      /* =========================================================
-         VARIABLES
-      ========================================================= */
-
-      let letterRevealed = false;
-
-      let countdownInterval = null;
-
-      let isPlaying = false;
-
-      let heartsStarted = false;
-
-      /* =========================================================
-         💌 LETTER CONTENT
-      ========================================================= */
-
-      const letterLines = [
-        {
-          text: "Dear Daizelle,",
-          speed: 80,
-          className: "greeting",
-        },
-
-        {
-          text: "Happy Birthday to a special and hard-working girl! I hope you take a break from all your lectures, activity and exams today to celebrate fully.",
-          speed: 45,
-          className: "",
-        },
-
-        {
-          text: "It’s so inspiring to see you balance college while staying so positive and bright. Even though you get annoyed easily, you honestly bring so much fun energy to us, and we feel incredibly lucky to have you as our friend!",
-          speed: 45,
-          className: "",
-        },
-
-        {
-          text: "I hope your birthday is surrounded by your favorite people, tasty food, and a big slice of cake. May this year be good to you, and may it bring you endless happiness, beautiful memories, and everything your heart desires.",
-          speed: 45,
-          className: "",
-        },
-
-        {
-          text: "You deserve all the happiness in the world today and every day after. Have a wonderful birthday celebration tonight! 🎉",
-          speed: 45,
-          className: "",
-        },
-
-        {
-          text: "Wishing you a beautiful birthday and a wonderful year ahead. 💗",
-          speed: 55,
-          className: "closing",
-        },
-
-        {
-          text: "Happy Birthday, Daizelle! 🎂💗",
-          speed: 80,
-          className: "final-message",
-        },
-
-        {
-          text: "From your admirer ♡",
-          speed: 70,
-          className: "admirer-message",
-        },
-      ];
-
-      /* =========================================================
-         SHOW DATE
-      ========================================================= */
-
-      function displayBirthdayDate() {
-        const date = new Date(year, month - 1, day);
-
-        birthdayDateDisplay.textContent = date.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-        });
-      }
-
-      displayBirthdayDate();
-
-      /* =========================================================
-         COUNTDOWN FORMAT
-      ========================================================= */
-
-      function formatCountdown(totalSeconds) {
-        const hours = Math.floor(totalSeconds / 3600);
-
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-
-        const seconds = totalSeconds % 60;
-
-        return (
-          String(hours).padStart(2, "0") +
-          ":" +
-          String(minutes).padStart(2, "0") +
-          ":" +
-          String(seconds).padStart(2, "0")
-        );
-      }
-
-      /* =========================================================
-         UPDATE COUNTDOWN
-      ========================================================= */
-
-      function updateCountdown() {
-        const now = Date.now();
-
-        const difference = targetDate - now;
-
-        if (difference <= 0) {
-          countdownTimer.textContent = "00:00:00";
-
-          revealBirthdayLetter();
-
-          return;
-        }
-
-        const totalSeconds = Math.ceil(difference / 1000);
-
-        countdownTimer.textContent = formatCountdown(totalSeconds);
-      }
-
-      /* =========================================================
-         START COUNTDOWN
-      ========================================================= */
-
-      updateCountdown();
-
-      countdownInterval = setInterval(updateCountdown, 100);
-
-      /* =========================================================
-         💌 REVEAL BIRTHDAY
-      ========================================================= */
-
-      function revealBirthdayLetter() {
-        if (letterRevealed) {
-          return;
-        }
-
-        letterRevealed = true;
-
-        /* STOP COUNTDOWN */
-
-        if (countdownInterval !== null) {
-          clearInterval(countdownInterval);
-
-          countdownInterval = null;
-        }
-
-        /* SHOW ZERO */
-
-        countdownTimer.textContent = "00:00:00";
-
-        /* HIDE COUNTDOWN */
-
-        countdownScreen.style.display = "none";
-
-        /* SHOW LETTER */
-
-        letterWindow.style.display = "block";
-
-        /* SHOW MUSIC BUTTON */
-
-        audioToggle.style.display = "block";
-
-        /* HIDE READ AGAIN */
-
-        readAgainButton.style.display = "none";
-
-        /* START HEARTS */
-
-        startHearts();
-
-        /* =====================================================
-           🎵 START MUSIC AUTOMATICALLY
-        ===================================================== */
-
-        setTimeout(function () {
-          playMusicAutomatically();
-        }, 300);
-
-        /* =====================================================
-           ✍️ START LETTER
-        ===================================================== */
-
-        setTimeout(function () {
-          startWriting();
-        }, 2300);
-      }
-
-      /* =========================================================
-         🎵 AUTOMATIC MUSIC
-      ========================================================= */
-
-      function playMusicAutomatically() {
-        if (!letterRevealed) {
-          return;
-        }
-
-        audio.volume = 0.9;
-        audio.muted = false;
-
-        const playPromise = audio.play();
-
-        if (playPromise !== undefined) {
-          playPromise
-            .then(function () {
-              isPlaying = true;
-
-              audioToggle.textContent = "🔇 Mute Music";
-            })
-            .catch(function (error) {
-              console.log("Autoplay was blocked by the browser.");
-
-              console.log(error);
-
-              isPlaying = false;
-
-              audioToggle.textContent = "🎵 Play Music";
-            });
-        }
-      }
-
-      /* =========================================================
-         ✍️ START WRITING
-      ========================================================= */
-
-      async function startWriting() {
-        const writingArea = document.getElementById("writingArea");
-
-        writingArea.innerHTML = "";
-
-        readAgainButton.style.display = "none";
-
-        for (const line of letterLines) {
-          await typeLine(writingArea, line.text, line.speed, line.className);
-        }
-
-        readAgainButton.style.display = "block";
-      }
-
-      /* =========================================================
-         ✍️ TYPE ONE LINE
-      ========================================================= */
-
-      function typeLine(container, text, speed, className) {
-        return new Promise(function (resolve) {
-          const paragraph = document.createElement("p");
-
-          paragraph.className = "type-line " + className;
-
-          container.appendChild(paragraph);
-
-          paragraph.classList.add("writing");
-
-          let index = 0;
-
-          function writeCharacter() {
-            if (index < text.length) {
-              paragraph.textContent += text.charAt(index);
-
-              index++;
-
-              setTimeout(writeCharacter, speed);
-            } else {
-              paragraph.classList.remove("writing");
-
-              setTimeout(resolve, 500);
-            }
+            return NaN;
           }
 
-          writeCharacter();
-        });
-      }
+          return timestamp;
+        }
 
-      /* =========================================================
-         💌 READ AGAIN
-      ========================================================= */
+        const targetDate = getTargetTimestamp();
 
-      readAgainButton.addEventListener("click", function () {
-        startWriting();
-      });
+        /* =========================================================
+           SHOW BIRTHDAY DATE
+        ========================================================= */
 
-      /* =========================================================
-         🎵 MUSIC BUTTON
+        function displayBirthdayDate() {
+          const parts = birthdayDate.split("-");
 
-         PLAY → MUTE
-         MUTE → UNMUTE
+          if (parts.length !== 3) {
+            birthdayDateDisplay.textContent = "Invalid date";
+            return;
+          }
 
-         IMPORTANT:
-         The music does NOT pause.
-         It only becomes silent when muted.
-      ========================================================= */
+          const year = Number(parts[0]);
+          const month = Number(parts[1]);
+          const day = Number(parts[2]);
 
-      audioToggle.addEventListener("click", function (event) {
-        event.stopPropagation();
+          const date = new Date(year, month - 1, day);
 
-        /* -----------------------------------------
-             If music is NOT playing,
-             start it first.
-          ----------------------------------------- */
+          if (Number.isNaN(date.getTime())) {
+            birthdayDateDisplay.textContent = "Invalid date";
+            return;
+          }
 
-        if (audio.paused) {
+          birthdayDateDisplay.textContent = date.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          });
+        }
+
+        displayBirthdayDate();
+
+        /* =========================================================
+           COUNTDOWN FORMAT
+        ========================================================= */
+
+        function formatCountdown(totalSeconds) {
+          totalSeconds = Math.max(0, Math.floor(totalSeconds));
+
+          const days = Math.floor(totalSeconds / 86400);
+          const hours = Math.floor((totalSeconds % 86400) / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+
+          return (
+            days +
+            (days === 1 ? " DAY " : " DAYS ") +
+            String(hours).padStart(2, "0") +
+            ":" +
+            String(minutes).padStart(2, "0") +
+            ":" +
+            String(seconds).padStart(2, "0")
+          );
+        }
+
+        /* =========================================================
+           UPDATE COUNTDOWN
+        ========================================================= */
+
+        function updateCountdown() {
+          if (letterRevealed) {
+            return;
+          }
+
+          if (Number.isNaN(targetDate)) {
+            countdownTimer.textContent = "INVALID TIME";
+            return;
+          }
+
+          const difference = targetDate - Date.now();
+
+          if (difference <= 0) {
+            countdownTimer.textContent = "00:00:00";
+
+            revealBirthdayLetter();
+
+            return;
+          }
+
+          /*
+            Math.ceil keeps the countdown from showing 00 seconds
+            one second too early.
+          */
+          const totalSeconds = Math.ceil(difference / 1000);
+
+          countdownTimer.textContent = formatCountdown(totalSeconds);
+        }
+
+        /* =========================================================
+           💌 REVEAL BIRTHDAY LETTER
+        ========================================================= */
+
+        function revealBirthdayLetter() {
+          if (letterRevealed) {
+            return;
+          }
+
+          letterRevealed = true;
+
+          if (countdownInterval !== null) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+          }
+
+          countdownTimer.textContent = "00:00:00";
+
+          countdownScreen.style.display = "none";
+
+          letterWindow.style.display = "block";
+
+          audioToggle.style.display = "block";
+
+          readAgainButton.style.display = "none";
+
+          startHearts();
+
+          setTimeout(function () {
+            playMusicAutomatically();
+          }, 300);
+
+          setTimeout(function () {
+            startWriting();
+          }, 2300);
+        }
+
+        /* =========================================================
+           🚀 START COUNTDOWN
+        ========================================================= */
+
+        /*
+          Run immediately after DOMContentLoaded.
+          This fixes the problem where the page stayed at:
+          "Loading date..." and "00:00:00".
+        */
+        updateCountdown();
+
+        if (!letterRevealed && !Number.isNaN(targetDate)) {
+          countdownInterval = setInterval(function () {
+            updateCountdown();
+          }, 250);
+        }
+
+        /* =========================================================
+           🎵 AUTOMATIC MUSIC
+        ========================================================= */
+
+        function playMusicAutomatically() {
+          if (!letterRevealed) {
+            return;
+          }
+
           audio.volume = 0.9;
           audio.muted = false;
 
@@ -1076,207 +1000,278 @@
             playPromise
               .then(function () {
                 isPlaying = true;
-
                 audioToggle.textContent = "🔇 Mute Music";
               })
               .catch(function (error) {
-                console.error("Music could not play:", error);
+                console.log("Autoplay was blocked by the browser.");
+                console.log(error);
 
                 isPlaying = false;
-
                 audioToggle.textContent = "🎵 Play Music";
               });
           }
-
-          return;
         }
 
-        /* -----------------------------------------
-             Music is playing.
+        /* =========================================================
+           ✍️ START WRITING
+        ========================================================= */
 
-             If muted → unmute
-             If not muted → mute
-          ----------------------------------------- */
-
-        if (audio.muted) {
-          audio.muted = false;
-
-          isPlaying = true;
-
-          audioToggle.textContent = "🔇 Mute Music";
-        } else {
-          audio.muted = true;
-
-          isPlaying = true;
-
-          audioToggle.textContent = "🔊 Unmute Music";
-        }
-      });
-
-      /* =========================================================
-         ⭐ STARS
-      ========================================================= */
-
-      const stars = [];
-
-      const starCount = 100;
-
-      function resizeCanvases() {
-        starCanvas.width = window.innerWidth;
-
-        starCanvas.height = window.innerHeight;
-
-        heartCanvas.width = window.innerWidth;
-
-        heartCanvas.height = window.innerHeight;
-      }
-
-      window.addEventListener("resize", resizeCanvases);
-
-      resizeCanvases();
-
-      for (let i = 0; i < starCount; i++) {
-        stars.push({
-          x: Math.random() * starCanvas.width,
-
-          y: Math.random() * starCanvas.height,
-
-          size: Math.random() * 1.8 + 0.4,
-
-          opacity: Math.random(),
-
-          speed: Math.random() * 0.02 + 0.005,
-        });
-      }
-
-      function drawStars() {
-        starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
-
-        stars.forEach(function (star) {
-          star.opacity += star.speed;
-
-          if (star.opacity >= 1 || star.opacity <= 0) {
-            star.speed *= -1;
-          }
-
-          starCtx.beginPath();
-
-          starCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-
-          starCtx.fillStyle = `rgba(
-            255,
-            160,
-            205,
-            ${Math.abs(star.opacity)}
-          )`;
-
-          starCtx.fill();
-        });
-
-        requestAnimationFrame(drawStars);
-      }
-
-      drawStars();
-
-      /* =========================================================
-         💗 HEARTS
-      ========================================================= */
-
-      const hearts = [];
-
-      const heartCount = 35;
-
-      for (let i = 0; i < heartCount; i++) {
-        hearts.push({
-          x: Math.random() * heartCanvas.width,
-
-          y: Math.random() * heartCanvas.height + heartCanvas.height,
-
-          size: Math.random() * 7 + 5,
-
-          speed: Math.random() * 0.7 + 0.3,
-
-          drift: (Math.random() - 0.5) * 0.4,
-
-          opacity: Math.random() * 0.35 + 0.15,
-        });
-      }
-
-      /* =========================================================
-         DRAW HEART
-      ========================================================= */
-
-      function drawHeart(ctx, x, y, size, opacity) {
-        ctx.save();
-
-        ctx.translate(x, y);
-
-        ctx.beginPath();
-
-        ctx.moveTo(0, size * 0.3);
-
-        ctx.bezierCurveTo(
-          -size,
-          -size * 0.3,
-          -size * 0.8,
-          -size,
-          0,
-          -size * 0.35,
-        );
-
-        ctx.bezierCurveTo(size * 0.8, -size, size, -size * 0.3, 0, size * 0.3);
-
-        ctx.closePath();
-
-        ctx.fillStyle = `rgba(
-          255,
-          145,
-          195,
-          ${opacity}
-        )`;
-
-        ctx.fill();
-
-        ctx.restore();
-      }
-
-      /* =========================================================
-         START HEARTS
-      ========================================================= */
-
-      function startHearts() {
-        if (heartsStarted) {
-          return;
-        }
-
-        heartsStarted = true;
-
-        function animateHearts() {
-          if (!letterRevealed) {
+        async function startWriting() {
+          if (writingStarted) {
             return;
           }
 
-          heartCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
+          writingStarted = true;
 
-          hearts.forEach(function (heart) {
-            drawHeart(heartCtx, heart.x, heart.y, heart.size, heart.opacity);
+          const writingArea = document.getElementById("writingArea");
 
-            heart.y -= heart.speed;
+          writingArea.innerHTML = "";
 
-            heart.x += heart.drift;
+          readAgainButton.style.display = "none";
 
-            if (heart.y < -30) {
-              heart.y = heartCanvas.height + 30;
+          for (const line of letterLines) {
+            await typeLine(writingArea, line.text, line.speed, line.className);
+          }
 
-              heart.x = Math.random() * heartCanvas.width;
-            }
-          });
-
-          requestAnimationFrame(animateHearts);
+          readAgainButton.style.display = "block";
         }
 
-        animateHearts();
-      }
+        /* =========================================================
+           ✍️ TYPE ONE LINE
+        ========================================================= */
+
+        function typeLine(container, text, speed, className) {
+          return new Promise(function (resolve) {
+            const paragraph = document.createElement("p");
+
+            paragraph.className = "type-line " + className;
+
+            container.appendChild(paragraph);
+
+            paragraph.classList.add("writing");
+
+            let index = 0;
+
+            function writeCharacter() {
+              if (index < text.length) {
+                paragraph.textContent += text.charAt(index);
+
+                index++;
+
+                setTimeout(writeCharacter, speed);
+              } else {
+                paragraph.classList.remove("writing");
+
+                setTimeout(resolve, 500);
+              }
+            }
+
+            writeCharacter();
+          });
+        }
+
+        /* =========================================================
+           💌 READ AGAIN
+        ========================================================= */
+
+        readAgainButton.addEventListener("click", function () {
+          writingStarted = false;
+          startWriting();
+        });
+
+        /* =========================================================
+           🎵 MUSIC BUTTON
+        ========================================================= */
+
+        audioToggle.addEventListener("click", function (event) {
+          event.stopPropagation();
+
+          if (audio.paused) {
+            audio.volume = 0.9;
+            audio.muted = false;
+
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+              playPromise
+                .then(function () {
+                  isPlaying = true;
+                  audioToggle.textContent = "🔇 Mute Music";
+                })
+                .catch(function (error) {
+                  console.error("Music could not play:", error);
+
+                  isPlaying = false;
+
+                  audioToggle.textContent = "🎵 Play Music";
+                });
+            }
+
+            return;
+          }
+
+          if (audio.muted) {
+            audio.muted = false;
+            isPlaying = true;
+
+            audioToggle.textContent = "🔇 Mute Music";
+          } else {
+            audio.muted = true;
+            isPlaying = true;
+
+            audioToggle.textContent = "🔊 Unmute Music";
+          }
+        });
+
+        /* =========================================================
+           ⭐ STARS
+        ========================================================= */
+
+        const stars = [];
+        const starCount = 100;
+
+        function resizeCanvases() {
+          starCanvas.width = window.innerWidth;
+          starCanvas.height = window.innerHeight;
+
+          heartCanvas.width = window.innerWidth;
+          heartCanvas.height = window.innerHeight;
+        }
+
+        window.addEventListener("resize", resizeCanvases);
+
+        resizeCanvases();
+
+        for (let i = 0; i < starCount; i++) {
+          stars.push({
+            x: Math.random() * starCanvas.width,
+            y: Math.random() * starCanvas.height,
+            size: Math.random() * 1.8 + 0.4,
+            opacity: Math.random(),
+            speed: Math.random() * 0.02 + 0.005,
+          });
+        }
+
+        function drawStars() {
+          starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+
+          stars.forEach(function (star) {
+            star.opacity += star.speed;
+
+            if (star.opacity >= 1 || star.opacity <= 0) {
+              star.speed *= -1;
+            }
+
+            starCtx.beginPath();
+
+            starCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+
+            starCtx.fillStyle =
+              "rgba(255, 160, 205, " + Math.abs(star.opacity) + ")";
+
+            starCtx.fill();
+          });
+
+          requestAnimationFrame(drawStars);
+        }
+
+        drawStars();
+
+        /* =========================================================
+           💗 HEARTS
+        ========================================================= */
+
+        const hearts = [];
+        const heartCount = 35;
+
+        for (let i = 0; i < heartCount; i++) {
+          hearts.push({
+            x: Math.random() * heartCanvas.width,
+            y: Math.random() * heartCanvas.height + heartCanvas.height,
+            size: Math.random() * 7 + 5,
+            speed: Math.random() * 0.7 + 0.3,
+            drift: (Math.random() - 0.5) * 0.4,
+            opacity: Math.random() * 0.35 + 0.15,
+          });
+        }
+
+        /* =========================================================
+           DRAW HEART
+        ========================================================= */
+
+        function drawHeart(ctx, x, y, size, opacity) {
+          ctx.save();
+
+          ctx.translate(x, y);
+
+          ctx.beginPath();
+
+          ctx.moveTo(0, size * 0.3);
+
+          ctx.bezierCurveTo(
+            -size,
+            -size * 0.3,
+            -size * 0.8,
+            -size,
+            0,
+            -size * 0.35,
+          );
+
+          ctx.bezierCurveTo(
+            size * 0.8,
+            -size,
+            size,
+            -size * 0.3,
+            0,
+            size * 0.3,
+          );
+
+          ctx.closePath();
+
+          ctx.fillStyle = "rgba(255, 145, 195, " + opacity + ")";
+
+          ctx.fill();
+
+          ctx.restore();
+        }
+
+        /* =========================================================
+           START HEARTS
+        ========================================================= */
+
+        function startHearts() {
+          if (heartsStarted) {
+            return;
+          }
+
+          heartsStarted = true;
+
+          function animateHearts() {
+            if (!letterRevealed) {
+              return;
+            }
+
+            heartCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
+
+            hearts.forEach(function (heart) {
+              drawHeart(heartCtx, heart.x, heart.y, heart.size, heart.opacity);
+
+              heart.y -= heart.speed;
+              heart.x += heart.drift;
+
+              if (heart.y < -30) {
+                heart.y = heartCanvas.height + 30;
+
+                heart.x = Math.random() * heartCanvas.width;
+              }
+            });
+
+            requestAnimationFrame(animateHearts);
+          }
+
+          animateHearts();
+        }
+      });
     </script>
   </body>
 </html>
