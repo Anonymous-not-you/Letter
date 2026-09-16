@@ -32,6 +32,7 @@
       body {
         min-height: 100vh;
         overflow-x: hidden;
+
         font-family: Georgia, "Times New Roman", serif;
         color: var(--text);
 
@@ -55,10 +56,10 @@
       }
 
       /* =========================================================
-         COUNTDOWN
-      ========================================================= */
+       SURPRISE BUTTON SCREEN
+    ========================================================= */
 
-      #countdown-screen {
+      #surprise-screen {
         position: fixed;
         inset: 0;
         z-index: 50;
@@ -90,29 +91,23 @@
         animation: fadeIn 1s ease;
       }
 
-      #countdown-screen::before {
+      #surprise-screen::before {
         content: "🎀";
-
         position: absolute;
         top: 8%;
         left: 8%;
-
         font-size: clamp(35px, 7vw, 70px);
         opacity: 0.65;
-
         transform: rotate(-15deg);
       }
 
-      #countdown-screen::after {
+      #surprise-screen::after {
         content: "🎂";
-
         position: absolute;
         right: 8%;
         bottom: 10%;
-
         font-size: clamp(40px, 8vw, 80px);
         opacity: 0.7;
-
         transform: rotate(8deg);
       }
 
@@ -125,64 +120,57 @@
         animation: cakeFloat 3s ease-in-out infinite;
       }
 
-      #countdown-title {
+      #surprise-title {
         color: var(--rose);
-
         font-size: clamp(27px, 5vw, 46px);
         font-weight: bold;
 
         text-shadow: 0 4px 15px rgba(190, 80, 130, 0.18);
       }
 
-      #countdown-subtitle {
+      #surprise-subtitle {
         margin-top: 7px;
-        margin-bottom: 15px;
+        margin-bottom: 25px;
 
         color: var(--text-soft);
-
         font-size: clamp(13px, 2vw, 17px);
         letter-spacing: 1px;
       }
 
-      #birthday-date {
-        margin-bottom: 22px;
+      #openLetterButton {
+        padding: 16px 32px;
 
-        color: var(--rose);
+        color: white;
+        background: linear-gradient(135deg, #f7a6c5, #d66b98);
 
-        font-size: clamp(17px, 3vw, 25px);
+        border: none;
+        border-radius: 35px;
+
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(16px, 2.5vw, 20px);
         font-weight: bold;
-        letter-spacing: 1px;
 
-        text-shadow: 0 3px 10px rgba(190, 80, 130, 0.15);
+        cursor: pointer;
+
+        box-shadow: 0 12px 30px rgba(150, 65, 105, 0.22);
+
+        transition: 0.25s ease;
+        animation: buttonPulse 2s infinite;
       }
 
-      #countdown-timer {
-        min-width: 330px;
+      #openLetterButton:hover {
+        transform: translateY(-3px) scale(1.03);
 
-        margin-top: 4px;
-        padding: 20px 32px;
+        box-shadow: 0 16px 35px rgba(150, 65, 105, 0.28);
+      }
 
-        color: #a84976;
-
-        background: rgba(255, 255, 255, 0.85);
-
-        border: 2px solid rgba(255, 150, 195, 0.38);
-        border-radius: 24px;
-
-        font-size: clamp(27px, 6vw, 44px);
-        font-weight: bold;
-        letter-spacing: 2px;
-
-        box-shadow:
-          0 15px 40px rgba(190, 80, 130, 0.13),
-          inset 0 0 25px rgba(255, 255, 255, 0.8);
-
-        animation: timerPulse 2s infinite;
+      #openLetterButton:active {
+        transform: scale(0.96);
       }
 
       /* =========================================================
-         CANVAS
-      ========================================================= */
+       CANVAS
+    ========================================================= */
 
       #star-canvas,
       #heart-canvas {
@@ -204,8 +192,8 @@
       }
 
       /* =========================================================
-         LETTER
-      ========================================================= */
+       LETTER
+    ========================================================= */
 
       .letter-container {
         position: relative;
@@ -242,11 +230,9 @@
         border: 1px solid rgba(220, 150, 180, 0.25);
 
         opacity: 0;
-
         transform: translateY(35px);
 
         animation: letterAppear 1.8s ease forwards;
-
         animation-delay: 0.3s;
       }
 
@@ -304,7 +290,8 @@
         font-size: 17px;
         line-height: 1.9;
 
-        text-align: left;
+        /* JUSTIFIED TEXT */
+        text-align: justify;
 
         letter-spacing: 0.1px;
       }
@@ -338,6 +325,8 @@
 
         font-weight: bold;
         font-size: 18px;
+
+        text-align: left;
       }
 
       .closing {
@@ -385,8 +374,55 @@
       }
 
       /* =========================================================
-         BUTTONS
-      ========================================================= */
+       CONFESSION SECTION
+    ========================================================= */
+
+      #confessionSection {
+        display: none;
+        margin-top: 25px;
+
+        animation: confessionReveal 1s ease;
+      }
+
+      #confessionButton {
+        display: none;
+
+        margin: 30px auto 20px;
+
+        padding: 13px 25px;
+
+        color: white;
+
+        background: linear-gradient(135deg, #f7a6c5, #d66b98);
+
+        border: none;
+        border-radius: 30px;
+
+        font-family: Georgia, "Times New Roman", serif;
+
+        font-size: 15px;
+        font-weight: bold;
+
+        cursor: pointer;
+
+        box-shadow: 0 8px 25px rgba(150, 65, 105, 0.18);
+
+        transition: 0.25s ease;
+      }
+
+      #confessionButton:hover {
+        transform: translateY(-2px) scale(1.02);
+
+        box-shadow: 0 12px 30px rgba(150, 65, 105, 0.25);
+      }
+
+      #confessionButton:active {
+        transform: scale(0.96);
+      }
+
+      /* =========================================================
+       BUTTONS
+    ========================================================= */
 
       #readAgainButton {
         display: none;
@@ -400,6 +436,7 @@
         background: rgba(255, 245, 249, 0.95);
 
         border: 1px solid rgba(220, 110, 160, 0.35);
+
         border-radius: 30px;
 
         font-family: Georgia, "Times New Roman", serif;
@@ -424,8 +461,8 @@
       }
 
       /* =========================================================
-         MUSIC BUTTON
-      ========================================================= */
+       MUSIC BUTTON
+    ========================================================= */
 
       .audio-hint {
         position: fixed;
@@ -468,8 +505,8 @@
       }
 
       /* =========================================================
-         ANIMATIONS
-      ========================================================= */
+       ANIMATIONS
+    ========================================================= */
 
       @keyframes fadeIn {
         from {
@@ -484,13 +521,11 @@
       @keyframes letterContainerReveal {
         from {
           opacity: 0;
-
           transform: translateY(40px) scale(0.96);
         }
 
         to {
           opacity: 1;
-
           transform: translateY(0) scale(1);
         }
       }
@@ -499,6 +534,18 @@
         from {
           opacity: 0;
           transform: translateY(40px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes confessionReveal {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
 
         to {
@@ -518,14 +565,14 @@
         }
       }
 
-      @keyframes timerPulse {
+      @keyframes buttonPulse {
         0%,
         100% {
           transform: scale(1);
         }
 
         50% {
-          transform: scale(1.025);
+          transform: scale(1.04);
         }
       }
 
@@ -542,34 +589,25 @@
       }
 
       /* =========================================================
-         MOBILE
-      ========================================================= */
+       MOBILE
+    ========================================================= */
 
       @media (max-width: 700px) {
-        #countdown-screen {
+        #surprise-screen {
           padding: 25px 15px;
         }
 
-        #countdown-title {
+        #surprise-title {
           font-size: 25px;
         }
 
-        #countdown-subtitle {
+        #surprise-subtitle {
           font-size: 12px;
         }
 
-        #birthday-date {
-          font-size: 18px;
-          margin-bottom: 18px;
-        }
-
-        #countdown-timer {
-          width: 90%;
-          min-width: 0;
-
-          padding: 17px 12px;
-
-          font-size: 25px;
+        #openLetterButton {
+          font-size: 15px;
+          padding: 14px 25px;
         }
 
         .letter-container {
@@ -617,6 +655,11 @@
           font-size: 14px;
         }
 
+        #confessionButton {
+          font-size: 13px;
+          padding: 11px 20px;
+        }
+
         #readAgainButton {
           font-size: 13px;
           padding: 9px 20px;
@@ -650,31 +693,29 @@
 
   <body>
     <!-- =========================================================
-       COUNTDOWN SCREEN
-    ========================================================= -->
+       SURPRISE BUTTON SCREEN
+  ========================================================= -->
 
-    <div id="countdown-screen">
+    <div id="surprise-screen">
       <div class="cake-decoration">🎂</div>
 
-      <div id="countdown-title">A Little Birthday Surprise 🎀</div>
+      <div id="surprise-title">A Little Birthday Surprise 🎀</div>
 
-      <div id="countdown-subtitle">Something special is waiting for you ✨</div>
+      <div id="surprise-subtitle">Something special is waiting for you ✨</div>
 
-      <div id="birthday-date">Loading date...</div>
-
-      <div id="countdown-timer">00:00:00</div>
+      <button id="openLetterButton" type="button">💌 Open Your Surprise</button>
     </div>
 
     <!-- =========================================================
        BACKGROUND CANVAS
-    ========================================================= -->
+  ========================================================= -->
 
     <canvas id="star-canvas"></canvas>
     <canvas id="heart-canvas"></canvas>
 
     <!-- =========================================================
        MUSIC
-    ========================================================= -->
+  ========================================================= -->
 
     <audio id="myAudio" loop preload="auto">
       <source
@@ -685,7 +726,7 @@
 
     <!-- =========================================================
        MUSIC BUTTON
-    ========================================================= -->
+  ========================================================= -->
 
     <button id="audioToggle" class="audio-hint" type="button">
       🎵 Play Music
@@ -693,15 +734,35 @@
 
     <!-- =========================================================
        LETTER
-    ========================================================= -->
+  ========================================================= -->
 
     <div class="letter-container" id="letterWindow">
       <div class="letter-paper">
         <div class="letter-heading">Happy Birthday, Daizelle! 🎀✨</div>
 
-        <div class="letter-subheading">A heartfelt birthday message</div>
+        <div class="letter-subheading">Message for You</div>
 
         <div class="message" id="writingArea"></div>
+
+        <!-- =====================================================
+           CONFESSION BUTTON
+      ===================================================== -->
+
+        <button id="confessionButton" type="button">
+          💗 There's Something I Want to Tell You
+        </button>
+
+        <!-- =====================================================
+           CONFESSION SECTION
+      ===================================================== -->
+
+        <div id="confessionSection">
+          <div class="message" id="confessionArea"></div>
+        </div>
+
+        <!-- =====================================================
+           READ AGAIN
+      ===================================================== -->
 
         <button id="readAgainButton" type="button">💌 Read Again</button>
       </div>
@@ -709,62 +770,60 @@
 
     <script>
       /* =========================================================
-         🎀 BIRTHDAY SURPRISE SCRIPT
-         Everything is inside one function so the countdown works
-         even if this file is opened/reloaded several times.
-      ========================================================= */
+       🎀 BIRTHDAY SURPRISE SCRIPT
+    ========================================================= */
 
       document.addEventListener("DOMContentLoaded", function () {
-        /* =========================================================
-           🎯 CHANGE ONLY THESE TWO VALUES
-        ========================================================= */
-
-        const birthdayDate = "2026-09-19";
-        const birthdayTime = "00:00:00";
-
-        /*
-          IMPORTANT:
-          Use 24-hour time.
-
-          Examples:
-          06:00:00 = 6:00 AM
-          12:00:00 = 12:00 PM
-          18:30:00 = 6:30 PM
-          20:00:00 = 8:00 PM
-
-          Philippine time (UTC+08:00) is used below.
-        */
-
-        /* =========================================================
+        /* =====================================================
            GET HTML ELEMENTS
-        ========================================================= */
+        ===================================================== */
 
-        const countdownScreen = document.getElementById("countdown-screen");
-        const countdownTimer = document.getElementById("countdown-timer");
-        const birthdayDateDisplay = document.getElementById("birthday-date");
+        const surpriseScreen = document.getElementById("surprise-screen");
+
+        const openLetterButton = document.getElementById("openLetterButton");
+
         const letterWindow = document.getElementById("letterWindow");
+
         const audioToggle = document.getElementById("audioToggle");
+
         const audio = document.getElementById("myAudio");
+
         const readAgainButton = document.getElementById("readAgainButton");
+
+        const confessionButton = document.getElementById("confessionButton");
+
+        const confessionSection = document.getElementById("confessionSection");
+
         const starCanvas = document.getElementById("star-canvas");
+
         const heartCanvas = document.getElementById("heart-canvas");
 
+        const writingArea = document.getElementById("writingArea");
+
+        const confessionArea = document.getElementById("confessionArea");
+
+        /* =====================================================
+           CANVAS CONTEXT
+        ===================================================== */
+
         const starCtx = starCanvas.getContext("2d");
+
         const heartCtx = heartCanvas.getContext("2d");
 
-        /* =========================================================
+        /* =====================================================
            VARIABLES
-        ========================================================= */
+        ===================================================== */
 
         let letterRevealed = false;
-        let countdownInterval = null;
         let isPlaying = false;
         let heartsStarted = false;
-        let writingStarted = false;
 
-        /* =========================================================
-           💌 LETTER CONTENT
-        ========================================================= */
+        let writingStarted = false;
+        let confessionStarted = false;
+
+        /* =====================================================
+           FIRST PART OF LETTER
+        ===================================================== */
 
         const letterLines = [
           {
@@ -774,29 +833,53 @@
           },
 
           {
-            text: "Happy Birthday to a special and hard-working girl! I hope you take a break from all your lectures, assignments and exams today to celebrate fully.",
+            text: "Happy birthday sayo Dol, Boi, Yahh!! Gusto ko lang sana kunin yung sandali na 'to para sabihin sayo na grateful ako dahil nakilala kita noon at naging isa sa mga kaibigan ko saka naging part ng buhay ko.",
             speed: 45,
             className: "",
           },
 
           {
-            text: "It is so inspiring to watch you balance your college life while you always keep a positive and bright attitude. You truly bring a lot of energy into the room and I feel so lucky to know you.",
+            text: "Sa totoo lang, hindi ko inakalang noong una kitang makita or makilala na magiging kaibigan kita. Tanda ko pa na nagkakilala tayo dahil sa isang babaeng nakausap ko noon. Hindi ko ma-imagine na dahil sa babaeng 'yon, magiging kaibigan kita ehh.",
             speed: 45,
             className: "",
           },
 
           {
-            text: "I hope your birthday is filled with your people, tasty food and a big slice of cake. May the year bring you closer to all your biggest academic goals and personal dreams.",
+            text: "Hindi ko din ine-expect na sa mga pag-uusap natin na kahit minsan nagcha-chat ako bigla dahil wala akong makausap ay magiging makahulugan pala bilang isang pagkakaibigan na puno ng kwentuhan, tawanan, at mga katarantaduhan na pinaggagawa kapag magkakasama tayo nila Tala.",
             speed: 45,
             className: "",
           },
 
           {
-            text: "You deserve all the happiness in the world today and every day after. Have a wonderful birthday celebration tonight! 🎉",
+            text: "Then wish ko sayo ay lahat ng dumating na pagsubok sayo ngayon malagpasan mo saka mas mapaligiran ka pa sana ng mga tao na makakasama sa journey mo. Then mabili mo muna yung pangarap mo (PHILIPPINES) 🙂",
+            speed: 45,
+            className: "",
+          },
+        ];
+
+        /* =====================================================
+           CONFESSION PART
+        ===================================================== */
+
+        const confessionLines = [
+          {
+            text: "Siguro sa part na 'to magiging medyo honest na ako sa'yo.",
             speed: 45,
             className: "",
           },
 
+          {
+            text: "Nung time umamin ako sa'yo after ng debut ni Tala, hindi pa ako sure nun. Pero after ng 2 weeks, na-realize ko na totoo pala na gusto talaga kita. Hindi ko lang magawa na aminin sa'yo or tanungin ka kung pwede kitang ligawan kasi ayoko na makaistorbo sa'yo dahil college  na tayo at busy kana rin masyado. Sa totoo lang, gustong-gusto kita, pero hindi ko magawa na ipilit yung feelings ko dahil ayoko rin na mauwi tayo sa pagkawala ng friendship natin dahil sa love.",
+            speed: 45,
+            className: "",
+          },
+        ];
+
+        /* =====================================================
+           FINAL PART
+        ===================================================== */
+
+        const finalLines = [
           {
             text: "Wishing you a beautiful birthday and a wonderful year ahead. 💗",
             speed: 55,
@@ -816,121 +899,9 @@
           },
         ];
 
-        /* =========================================================
-           🎯 CREATE TARGET DATE
-        ========================================================= */
-
-        function getTargetTimestamp() {
-          const dateTimeText = birthdayDate + "T" + birthdayTime + "+08:00";
-
-          const timestamp = new Date(dateTimeText).getTime();
-
-          if (Number.isNaN(timestamp)) {
-            console.error(
-              "Invalid birthday date/time:",
-              birthdayDate,
-              birthdayTime,
-            );
-
-            return NaN;
-          }
-
-          return timestamp;
-        }
-
-        const targetDate = getTargetTimestamp();
-
-        /* =========================================================
-           SHOW BIRTHDAY DATE
-        ========================================================= */
-
-        function displayBirthdayDate() {
-          const parts = birthdayDate.split("-");
-
-          if (parts.length !== 3) {
-            birthdayDateDisplay.textContent = "Invalid date";
-            return;
-          }
-
-          const year = Number(parts[0]);
-          const month = Number(parts[1]);
-          const day = Number(parts[2]);
-
-          const date = new Date(year, month - 1, day);
-
-          if (Number.isNaN(date.getTime())) {
-            birthdayDateDisplay.textContent = "Invalid date";
-            return;
-          }
-
-          birthdayDateDisplay.textContent = date.toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          });
-        }
-
-        displayBirthdayDate();
-
-        /* =========================================================
-           COUNTDOWN FORMAT
-        ========================================================= */
-
-        function formatCountdown(totalSeconds) {
-          totalSeconds = Math.max(0, Math.floor(totalSeconds));
-
-          const days = Math.floor(totalSeconds / 86400);
-          const hours = Math.floor((totalSeconds % 86400) / 3600);
-          const minutes = Math.floor((totalSeconds % 3600) / 60);
-          const seconds = totalSeconds % 60;
-
-          return (
-            days +
-            (days === 1 ? " DAY " : " DAYS ") +
-            String(hours).padStart(2, "0") +
-            ":" +
-            String(minutes).padStart(2, "0") +
-            ":" +
-            String(seconds).padStart(2, "0")
-          );
-        }
-
-        /* =========================================================
-           UPDATE COUNTDOWN
-        ========================================================= */
-
-        function updateCountdown() {
-          if (letterRevealed) {
-            return;
-          }
-
-          if (Number.isNaN(targetDate)) {
-            countdownTimer.textContent = "INVALID TIME";
-            return;
-          }
-
-          const difference = targetDate - Date.now();
-
-          if (difference <= 0) {
-            countdownTimer.textContent = "00:00:00";
-
-            revealBirthdayLetter();
-
-            return;
-          }
-
-          /*
-            Math.ceil keeps the countdown from showing 00 seconds
-            one second too early.
-          */
-          const totalSeconds = Math.ceil(difference / 1000);
-
-          countdownTimer.textContent = formatCountdown(totalSeconds);
-        }
-
-        /* =========================================================
-           💌 REVEAL BIRTHDAY LETTER
-        ========================================================= */
+        /* =====================================================
+           REVEAL BIRTHDAY LETTER
+        ===================================================== */
 
         function revealBirthdayLetter() {
           if (letterRevealed) {
@@ -939,18 +910,15 @@
 
           letterRevealed = true;
 
-          if (countdownInterval !== null) {
-            clearInterval(countdownInterval);
-            countdownInterval = null;
-          }
-
-          countdownTimer.textContent = "00:00:00";
-
-          countdownScreen.style.display = "none";
+          surpriseScreen.style.display = "none";
 
           letterWindow.style.display = "block";
 
           audioToggle.style.display = "block";
+
+          confessionButton.style.display = "none";
+
+          confessionSection.style.display = "none";
 
           readAgainButton.style.display = "none";
 
@@ -965,26 +933,17 @@
           }, 2300);
         }
 
-        /* =========================================================
-           🚀 START COUNTDOWN
-        ========================================================= */
+        /* =====================================================
+           OPEN BUTTON
+        ===================================================== */
 
-        /*
-          Run immediately after DOMContentLoaded.
-          This fixes the problem where the page stayed at:
-          "Loading date..." and "00:00:00".
-        */
-        updateCountdown();
+        openLetterButton.addEventListener("click", function () {
+          revealBirthdayLetter();
+        });
 
-        if (!letterRevealed && !Number.isNaN(targetDate)) {
-          countdownInterval = setInterval(function () {
-            updateCountdown();
-          }, 250);
-        }
-
-        /* =========================================================
-           🎵 AUTOMATIC MUSIC
-        ========================================================= */
+        /* =====================================================
+           AUTOMATIC MUSIC
+        ===================================================== */
 
         function playMusicAutomatically() {
           if (!letterRevealed) {
@@ -1000,21 +959,24 @@
             playPromise
               .then(function () {
                 isPlaying = true;
+
                 audioToggle.textContent = "🔇 Mute Music";
               })
               .catch(function (error) {
                 console.log("Autoplay was blocked by the browser.");
+
                 console.log(error);
 
                 isPlaying = false;
+
                 audioToggle.textContent = "🎵 Play Music";
               });
           }
         }
 
-        /* =========================================================
-           ✍️ START WRITING
-        ========================================================= */
+        /* =====================================================
+           START FIRST PART
+        ===================================================== */
 
         async function startWriting() {
           if (writingStarted) {
@@ -1023,9 +985,13 @@
 
           writingStarted = true;
 
-          const writingArea = document.getElementById("writingArea");
-
           writingArea.innerHTML = "";
+
+          confessionArea.innerHTML = "";
+
+          confessionSection.style.display = "none";
+
+          confessionStarted = false;
 
           readAgainButton.style.display = "none";
 
@@ -1033,12 +999,52 @@
             await typeLine(writingArea, line.text, line.speed, line.className);
           }
 
+          /* Show confession button */
+
+          confessionButton.style.display = "block";
+        }
+
+        /* =====================================================
+           START CONFESSION
+        ===================================================== */
+
+        async function startConfession() {
+          if (confessionStarted) {
+            return;
+          }
+
+          confessionStarted = true;
+
+          confessionArea.innerHTML = "";
+
+          readAgainButton.style.display = "none";
+
+          for (const line of confessionLines) {
+            await typeLine(
+              confessionArea,
+              line.text,
+              line.speed,
+              line.className,
+            );
+          }
+
+          /* After confession, show final messages */
+
+          for (const line of finalLines) {
+            await typeLine(
+              confessionArea,
+              line.text,
+              line.speed,
+              line.className,
+            );
+          }
+
           readAgainButton.style.display = "block";
         }
 
-        /* =========================================================
-           ✍️ TYPE ONE LINE
-        ========================================================= */
+        /* =====================================================
+           TYPE ONE LINE
+        ===================================================== */
 
         function typeLine(container, text, speed, className) {
           return new Promise(function (resolve) {
@@ -1070,18 +1076,43 @@
           });
         }
 
-        /* =========================================================
-           💌 READ AGAIN
-        ========================================================= */
+        /* =====================================================
+           CONFESSION BUTTON
+        ===================================================== */
+
+        confessionButton.addEventListener("click", function () {
+          confessionButton.style.display = "none";
+
+          confessionSection.style.display = "block";
+
+          startConfession();
+        });
+
+        /* =====================================================
+           READ AGAIN
+        ===================================================== */
 
         readAgainButton.addEventListener("click", function () {
           writingStarted = false;
+
+          confessionStarted = false;
+
+          writingArea.innerHTML = "";
+
+          confessionArea.innerHTML = "";
+
+          confessionSection.style.display = "none";
+
+          readAgainButton.style.display = "none";
+
+          confessionButton.style.display = "none";
+
           startWriting();
         });
 
-        /* =========================================================
-           🎵 MUSIC BUTTON
-        ========================================================= */
+        /* =====================================================
+           MUSIC BUTTON
+        ===================================================== */
 
         audioToggle.addEventListener("click", function (event) {
           event.stopPropagation();
@@ -1096,6 +1127,7 @@
               playPromise
                 .then(function () {
                   isPlaying = true;
+
                   audioToggle.textContent = "🔇 Mute Music";
                 })
                 .catch(function (error) {
@@ -1112,29 +1144,34 @@
 
           if (audio.muted) {
             audio.muted = false;
+
             isPlaying = true;
 
             audioToggle.textContent = "🔇 Mute Music";
           } else {
             audio.muted = true;
+
             isPlaying = true;
 
             audioToggle.textContent = "🔊 Unmute Music";
           }
         });
 
-        /* =========================================================
-           ⭐ STARS
-        ========================================================= */
+        /* =====================================================
+           STARS
+        ===================================================== */
 
         const stars = [];
+
         const starCount = 100;
 
         function resizeCanvases() {
           starCanvas.width = window.innerWidth;
+
           starCanvas.height = window.innerHeight;
 
           heartCanvas.width = window.innerWidth;
+
           heartCanvas.height = window.innerHeight;
         }
 
@@ -1145,9 +1182,13 @@
         for (let i = 0; i < starCount; i++) {
           stars.push({
             x: Math.random() * starCanvas.width,
+
             y: Math.random() * starCanvas.height,
+
             size: Math.random() * 1.8 + 0.4,
+
             opacity: Math.random(),
+
             speed: Math.random() * 0.02 + 0.005,
           });
         }
@@ -1177,27 +1218,33 @@
 
         drawStars();
 
-        /* =========================================================
-           💗 HEARTS
-        ========================================================= */
+        /* =====================================================
+           HEARTS
+        ===================================================== */
 
         const hearts = [];
+
         const heartCount = 35;
 
         for (let i = 0; i < heartCount; i++) {
           hearts.push({
             x: Math.random() * heartCanvas.width,
+
             y: Math.random() * heartCanvas.height + heartCanvas.height,
+
             size: Math.random() * 7 + 5,
+
             speed: Math.random() * 0.7 + 0.3,
+
             drift: (Math.random() - 0.5) * 0.4,
+
             opacity: Math.random() * 0.35 + 0.15,
           });
         }
 
-        /* =========================================================
+        /* =====================================================
            DRAW HEART
-        ========================================================= */
+        ===================================================== */
 
         function drawHeart(ctx, x, y, size, opacity) {
           ctx.save();
@@ -1235,9 +1282,9 @@
           ctx.restore();
         }
 
-        /* =========================================================
+        /* =====================================================
            START HEARTS
-        ========================================================= */
+        ===================================================== */
 
         function startHearts() {
           if (heartsStarted) {
@@ -1257,6 +1304,7 @@
               drawHeart(heartCtx, heart.x, heart.y, heart.size, heart.opacity);
 
               heart.y -= heart.speed;
+
               heart.x += heart.drift;
 
               if (heart.y < -30) {
