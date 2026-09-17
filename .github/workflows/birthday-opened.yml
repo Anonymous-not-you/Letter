@@ -1,0 +1,15 @@
+name: Birthday Surprise Opened
+
+on:
+  repository_dispatch:
+    types: [birthday_opened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Birthday surprise was opened
+        run: |
+          echo "🎀 Daizelle opened her birthday surprise! 💗"
+          echo "Message: ${{ github.event.client_payload.message }}"
