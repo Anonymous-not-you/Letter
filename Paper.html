@@ -32,7 +32,6 @@
       body {
         min-height: 100vh;
         overflow-x: hidden;
-
         font-family: Georgia, "Times New Roman", serif;
         color: var(--text);
 
@@ -56,14 +55,13 @@
       }
 
       /* =========================================================
-       SURPRISE BUTTON SCREEN
-    ========================================================= */
+         SURPRISE BUTTON SCREEN
+      ========================================================= */
 
       #surprise-screen {
         position: fixed;
         inset: 0;
         z-index: 50;
-
         min-height: 100vh;
         padding: 30px 20px;
 
@@ -155,6 +153,7 @@
         box-shadow: 0 12px 30px rgba(150, 65, 105, 0.22);
 
         transition: 0.25s ease;
+
         animation: buttonPulse 2s infinite;
       }
 
@@ -169,8 +168,8 @@
       }
 
       /* =========================================================
-       CANVAS
-    ========================================================= */
+         CANVAS
+      ========================================================= */
 
       #star-canvas,
       #heart-canvas {
@@ -192,8 +191,8 @@
       }
 
       /* =========================================================
-       LETTER
-    ========================================================= */
+         LETTER
+      ========================================================= */
 
       .letter-container {
         position: relative;
@@ -230,9 +229,11 @@
         border: 1px solid rgba(220, 150, 180, 0.25);
 
         opacity: 0;
+
         transform: translateY(35px);
 
         animation: letterAppear 1.8s ease forwards;
+
         animation-delay: 0.3s;
       }
 
@@ -290,7 +291,6 @@
         font-size: 17px;
         line-height: 1.9;
 
-        /* JUSTIFIED TEXT */
         text-align: justify;
 
         letter-spacing: 0.1px;
@@ -374,11 +374,12 @@
       }
 
       /* =========================================================
-       CONFESSION SECTION
-    ========================================================= */
+         CONFESSION
+      ========================================================= */
 
       #confessionSection {
         display: none;
+
         margin-top: 25px;
 
         animation: confessionReveal 1s ease;
@@ -421,8 +422,8 @@
       }
 
       /* =========================================================
-       BUTTONS
-    ========================================================= */
+         READ AGAIN
+      ========================================================= */
 
       #readAgainButton {
         display: none;
@@ -461,8 +462,8 @@
       }
 
       /* =========================================================
-       MUSIC BUTTON
-    ========================================================= */
+         MUSIC
+      ========================================================= */
 
       .audio-hint {
         position: fixed;
@@ -505,8 +506,8 @@
       }
 
       /* =========================================================
-       ANIMATIONS
-    ========================================================= */
+         ANIMATIONS
+      ========================================================= */
 
       @keyframes fadeIn {
         from {
@@ -589,8 +590,8 @@
       }
 
       /* =========================================================
-       MOBILE
-    ========================================================= */
+         MOBILE
+      ========================================================= */
 
       @media (max-width: 700px) {
         #surprise-screen {
@@ -693,8 +694,8 @@
 
   <body>
     <!-- =========================================================
-       SURPRISE BUTTON SCREEN
-  ========================================================= -->
+         SURPRISE SCREEN
+    ========================================================= -->
 
     <div id="surprise-screen">
       <div class="cake-decoration">🎂</div>
@@ -707,15 +708,15 @@
     </div>
 
     <!-- =========================================================
-       BACKGROUND CANVAS
-  ========================================================= -->
+         CANVAS
+    ========================================================= -->
 
     <canvas id="star-canvas"></canvas>
     <canvas id="heart-canvas"></canvas>
 
     <!-- =========================================================
-       MUSIC
-  ========================================================= -->
+         MUSIC
+    ========================================================= -->
 
     <audio id="myAudio" loop preload="auto">
       <source
@@ -725,16 +726,16 @@
     </audio>
 
     <!-- =========================================================
-       MUSIC BUTTON
-  ========================================================= -->
+         MUSIC BUTTON
+    ========================================================= -->
 
     <button id="audioToggle" class="audio-hint" type="button">
       🎵 Play Music
     </button>
 
     <!-- =========================================================
-       LETTER
-  ========================================================= -->
+         LETTER
+    ========================================================= -->
 
     <div class="letter-container" id="letterWindow">
       <div class="letter-paper">
@@ -745,24 +746,24 @@
         <div class="message" id="writingArea"></div>
 
         <!-- =====================================================
-           CONFESSION BUTTON
-      ===================================================== -->
+             CONFESSION BUTTON
+        ===================================================== -->
 
         <button id="confessionButton" type="button">
           💗 There's Something I Want to Tell You
         </button>
 
         <!-- =====================================================
-           CONFESSION SECTION
-      ===================================================== -->
+             CONFESSION SECTION
+        ===================================================== -->
 
         <div id="confessionSection">
           <div class="message" id="confessionArea"></div>
         </div>
 
         <!-- =====================================================
-           READ AGAIN
-      ===================================================== -->
+             READ AGAIN
+        ===================================================== -->
 
         <button id="readAgainButton" type="button">💌 Read Again</button>
       </div>
@@ -770,13 +771,13 @@
 
     <script>
       /* =========================================================
-       🎀 BIRTHDAY SURPRISE SCRIPT
-    ========================================================= */
+         🎀 BIRTHDAY SURPRISE SCRIPT
+      ========================================================= */
 
       document.addEventListener("DOMContentLoaded", function () {
         /* =====================================================
-           GET HTML ELEMENTS
-        ===================================================== */
+             GET HTML ELEMENTS
+          ===================================================== */
 
         const surpriseScreen = document.getElementById("surprise-screen");
 
@@ -803,105 +804,206 @@
         const confessionArea = document.getElementById("confessionArea");
 
         /* =====================================================
-           CANVAS CONTEXT
-        ===================================================== */
+             📱 NOTIFICATION SETTINGS
+          =====================================================
+
+             IMPORTANT:
+
+             Your GitHub repository is:
+
+             Anonymous-not-you/Letter
+
+             DO NOT put this here:
+
+             https://github.com/Anonymous-not-you/Letter
+
+             Instead, this must be your Cloudflare Worker URL.
+
+             Example:
+
+             https://birthday-notification-xxxxx.workers.dev
+
+             Do NOT put your GitHub token in this HTML.
+          ===================================================== */
+
+        const NOTIFICATION_URL =
+          "https://birthday-notification.delacruzjm010.workers.dev/";
+
+        /* =====================================================
+             📱 SEND NOTIFICATION
+          ===================================================== */
+
+        async function sendGitHubNotification() {
+          try {
+            /* Check if Worker URL was added */
+
+            if (
+              !NOTIFICATION_URL ||
+              NOTIFICATION_URL ===
+                "https://birthday-notification.delacruzjm010.workers.dev/"
+            ) {
+              console.error("❌ Cloudflare Worker URL is missing.");
+
+              return;
+            }
+
+            /* Send request to Cloudflare Worker */
+
+            const response = await fetch(NOTIFICATION_URL, {
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify({
+                message: "🎀 Daizelle opened her birthday surprise! 💗",
+              }),
+            });
+
+            /* Check response */
+
+            if (!response.ok) {
+              const errorText = await response.text();
+
+              console.error(
+                "❌ Notification failed:",
+                response.status,
+                errorText,
+              );
+
+              return;
+            }
+
+            console.log("🎀 Daizelle opened her birthday surprise! 💗");
+          } catch (error) {
+            console.error("❌ Notification error:", error);
+          }
+        }
+
+        /* =====================================================
+             CANVAS CONTEXT
+          ===================================================== */
 
         const starCtx = starCanvas.getContext("2d");
 
         const heartCtx = heartCanvas.getContext("2d");
 
         /* =====================================================
-           VARIABLES
-        ===================================================== */
+             VARIABLES
+          ===================================================== */
 
         let letterRevealed = false;
+
         let isPlaying = false;
+
         let heartsStarted = false;
 
         let writingStarted = false;
+
         let confessionStarted = false;
 
         /* =====================================================
-           FIRST PART OF LETTER
-        ===================================================== */
+             FIRST PART OF LETTER
+          ===================================================== */
 
         const letterLines = [
           {
             text: "Dear Daizelle,",
+
             speed: 80,
+
             className: "greeting",
           },
 
           {
             text: "Happy birthday sayo Dol, Boi, Yahh!! Gusto ko lang sana kunin yung sandali na 'to para sabihin sayo na grateful ako dahil nakilala kita noon at naging isa sa mga kaibigan ko saka naging part ng buhay ko.",
+
             speed: 45,
+
             className: "",
           },
 
           {
             text: "Sa totoo lang, hindi ko inakalang noong una kitang makita or makilala na magiging kaibigan kita. Tanda ko pa na nagkakilala tayo dahil sa isang babaeng nakausap ko noon. Hindi ko ma-imagine na dahil sa babaeng 'yon, magiging kaibigan kita ehh.",
+
             speed: 45,
+
             className: "",
           },
 
           {
             text: "Hindi ko din ine-expect na sa mga pag-uusap natin na kahit minsan nagcha-chat ako bigla dahil wala akong makausap ay magiging makahulugan pala bilang isang pagkakaibigan na puno ng kwentuhan, tawanan, at mga katarantaduhan na pinaggagawa kapag magkakasama tayo nila Tala.",
+
             speed: 45,
+
             className: "",
           },
 
           {
             text: "Then wish ko sayo ay lahat ng dumating na pagsubok sayo ngayon malagpasan mo saka mas mapaligiran ka pa sana ng mga tao na makakasama sa journey mo. Then mabili mo muna yung pangarap mo (PHILIPPINES) 🙂",
+
             speed: 45,
+
             className: "",
           },
         ];
 
         /* =====================================================
-           CONFESSION PART
-        ===================================================== */
+             CONFESSION
+          ===================================================== */
 
         const confessionLines = [
           {
             text: "Siguro sa part na 'to magiging medyo honest na ako sa'yo.",
+
             speed: 45,
+
             className: "",
           },
 
           {
-            text: "Nung time umamin ako sa'yo after ng debut ni Tala, hindi pa ako sure nun. Pero after ng 2 weeks, na-realize ko na totoo pala na gusto talaga kita. Hindi ko lang magawa na aminin sa'yo or tanungin ka kung pwede kitang ligawan kasi ayoko na makaistorbo sa'yo dahil college  na tayo at busy kana rin masyado. Sa totoo lang, gustong-gusto kita, pero hindi ko magawa na ipilit yung feelings ko dahil ayoko rin na mauwi tayo sa pagkawala ng friendship natin dahil sa love.",
+            text: "Nung time umamin ako sa'yo after ng debut ni Tala, hindi pa ako sure nun. Pero after ng 2 weeks, na-realize ko na totoo pala na gusto talaga kita. Hindi ko lang magawa na aminin sa'yo or tanungin ka kung pwede kitang ligawan kasi ayoko na makaistorbo sa'yo dahil college na tayo at busy kana rin masyado. Sa totoo lang, gustong-gusto kita, pero hindi ko magawa na ipilit yung feelings ko dahil ayoko rin na mauwi tayo sa pagkawala ng friendship natin dahil sa love.",
+
             speed: 45,
+
             className: "",
           },
         ];
 
         /* =====================================================
-           FINAL PART
-        ===================================================== */
+             FINAL MESSAGE
+          ===================================================== */
 
         const finalLines = [
           {
             text: "Wishing you a beautiful birthday and a wonderful year ahead. 💗",
+
             speed: 55,
+
             className: "closing",
           },
 
           {
             text: "Happy Birthday, Daizelle! 🎂💗",
+
             speed: 80,
+
             className: "final-message",
           },
 
           {
             text: "From your admirer ♡",
+
             speed: 70,
+
             className: "admirer-message",
           },
         ];
 
         /* =====================================================
-           REVEAL BIRTHDAY LETTER
-        ===================================================== */
+             REVEAL LETTER
+          ===================================================== */
 
         function revealBirthdayLetter() {
           if (letterRevealed) {
@@ -934,16 +1036,30 @@
         }
 
         /* =====================================================
-           OPEN BUTTON
-        ===================================================== */
+             💌 OPEN SURPRISE
+          ===================================================== */
 
         openLetterButton.addEventListener("click", function () {
+          /*
+           * Send notification.
+           *
+           * The letter opens immediately,
+           * so the notification will not
+           * prevent her from seeing the letter.
+           */
+
+          sendGitHubNotification();
+
+          /*
+           * Open birthday letter.
+           */
+
           revealBirthdayLetter();
         });
 
         /* =====================================================
-           AUTOMATIC MUSIC
-        ===================================================== */
+             MUSIC
+          ===================================================== */
 
         function playMusicAutomatically() {
           if (!letterRevealed) {
@@ -951,17 +1067,20 @@
           }
 
           audio.volume = 0.9;
+
           audio.muted = false;
 
           const playPromise = audio.play();
 
           if (playPromise !== undefined) {
             playPromise
+
               .then(function () {
                 isPlaying = true;
 
                 audioToggle.textContent = "🔇 Mute Music";
               })
+
               .catch(function (error) {
                 console.log("Autoplay was blocked by the browser.");
 
@@ -975,8 +1094,8 @@
         }
 
         /* =====================================================
-           START FIRST PART
-        ===================================================== */
+             START WRITING
+          ===================================================== */
 
         async function startWriting() {
           if (writingStarted) {
@@ -999,14 +1118,12 @@
             await typeLine(writingArea, line.text, line.speed, line.className);
           }
 
-          /* Show confession button */
-
           confessionButton.style.display = "block";
         }
 
         /* =====================================================
-           START CONFESSION
-        ===================================================== */
+             START CONFESSION
+          ===================================================== */
 
         async function startConfession() {
           if (confessionStarted) {
@@ -1028,8 +1145,6 @@
             );
           }
 
-          /* After confession, show final messages */
-
           for (const line of finalLines) {
             await typeLine(
               confessionArea,
@@ -1043,8 +1158,8 @@
         }
 
         /* =====================================================
-           TYPE ONE LINE
-        ===================================================== */
+             TYPE ONE LINE
+          ===================================================== */
 
         function typeLine(container, text, speed, className) {
           return new Promise(function (resolve) {
@@ -1077,8 +1192,8 @@
         }
 
         /* =====================================================
-           CONFESSION BUTTON
-        ===================================================== */
+             CONFESSION BUTTON
+          ===================================================== */
 
         confessionButton.addEventListener("click", function () {
           confessionButton.style.display = "none";
@@ -1089,8 +1204,8 @@
         });
 
         /* =====================================================
-           READ AGAIN
-        ===================================================== */
+             READ AGAIN
+          ===================================================== */
 
         readAgainButton.addEventListener("click", function () {
           writingStarted = false;
@@ -1111,25 +1226,28 @@
         });
 
         /* =====================================================
-           MUSIC BUTTON
-        ===================================================== */
+             MUSIC BUTTON
+          ===================================================== */
 
         audioToggle.addEventListener("click", function (event) {
           event.stopPropagation();
 
           if (audio.paused) {
             audio.volume = 0.9;
+
             audio.muted = false;
 
             const playPromise = audio.play();
 
             if (playPromise !== undefined) {
               playPromise
+
                 .then(function () {
                   isPlaying = true;
 
                   audioToggle.textContent = "🔇 Mute Music";
                 })
+
                 .catch(function (error) {
                   console.error("Music could not play:", error);
 
@@ -1158,8 +1276,8 @@
         });
 
         /* =====================================================
-           STARS
-        ===================================================== */
+             STARS
+          ===================================================== */
 
         const stars = [];
 
@@ -1219,8 +1337,8 @@
         drawStars();
 
         /* =====================================================
-           HEARTS
-        ===================================================== */
+             HEARTS
+          ===================================================== */
 
         const hearts = [];
 
@@ -1243,8 +1361,8 @@
         }
 
         /* =====================================================
-           DRAW HEART
-        ===================================================== */
+             DRAW HEART
+          ===================================================== */
 
         function drawHeart(ctx, x, y, size, opacity) {
           ctx.save();
@@ -1258,8 +1376,10 @@
           ctx.bezierCurveTo(
             -size,
             -size * 0.3,
+
             -size * 0.8,
             -size,
+
             0,
             -size * 0.35,
           );
@@ -1267,8 +1387,10 @@
           ctx.bezierCurveTo(
             size * 0.8,
             -size,
+
             size,
             -size * 0.3,
+
             0,
             size * 0.3,
           );
@@ -1283,8 +1405,8 @@
         }
 
         /* =====================================================
-           START HEARTS
-        ===================================================== */
+             START HEARTS
+          ===================================================== */
 
         function startHearts() {
           if (heartsStarted) {
